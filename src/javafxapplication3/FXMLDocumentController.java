@@ -30,6 +30,12 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.CheckBox;
 import javafx.beans.value.ObservableValue;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent; 
+import org.openqa.selenium.By;  
+import org.openqa.selenium.WebDriver;   
+import org.openqa.selenium.firefox.FirefoxDriver; 
 
 /**
  *
@@ -63,13 +69,29 @@ public class FXMLDocumentController implements Initializable {
     }
     
     @FXML
-    private void processButtonAction(ActionEvent event) throws IOException {
-        readXLSXFile();
+    private void processButtonAction(ActionEvent event) throws AWTException,InterruptedException ,IOException {
+           WebDriver driver = new FirefoxDriver();  
+           driver.get("http://spreadsheetpage.com/index.php/file/C35/P10/"); // sample url  
+           driver.findElement(By.xpath(".//a[@href=contains(text(),'yearly-calendar.xls')]")).click();  
+           Robot robot = new Robot();  // Robot class throws AWT Exception  
+           Thread.sleep(2000); // Thread.sleep throws InterruptedException  
+           robot.keyPress(KeyEvent.VK_DOWN);  // press arrow down key of keyboard to navigate and select Save radio button  
+            
+           Thread.sleep(2000);  // sleep has only been used to showcase each event separately   
+           robot.keyPress(KeyEvent.VK_TAB); 
+           Thread.sleep(2000);  
+           robot.keyPress(KeyEvent.VK_TAB); 
+           Thread.sleep(2000);  
+           robot.keyPress(KeyEvent.VK_TAB); 
+           Thread.sleep(2000);  
+           robot.keyPress(KeyEvent.VK_ENTER);   
+        //readXLSXFile();
         //System.out.println(uploadtext.getText());
     }
     
     public static void readXLSXFile() throws IOException
     {
+                
 		InputStream ExcelFileToRead;
                 ExcelFileToRead = new FileInputStream("C:\\Users\\IBM_ADMIN\\Desktop\\reimbursement.xlsx");
 		XSSFWorkbook  wb = new XSSFWorkbook(ExcelFileToRead);
@@ -82,30 +104,34 @@ public class FXMLDocumentController implements Initializable {
 		XSSFCell cell;
 
 		Iterator rows = sheet.rowIterator();
-
+                ObservableList<ObservableList> csvData = FXCollections.observableArrayList(); 
 		while (rows.hasNext())
 		{
+                     ObservableList<String> amzrow = FXCollections.observableArrayList();
 			row=(XSSFRow) rows.next();
 			Iterator cells = row.cellIterator();
 			while (cells.hasNext())
 			{
 				cell=(XSSFCell) cells.next();
-		
+                                
 				if (cell.getCellType() == XSSFCell.CELL_TYPE_STRING)
 				{
-					System.out.print(cell.getStringCellValue()+" ");
+                                    amzrow.add(cell.getStringCellValue()); 
+					//System.out.print(cell.getStringCellValue()+" ");
 				}
 				else if(cell.getCellType() == XSSFCell.CELL_TYPE_NUMERIC)
 				{
-					System.out.print(cell.getNumericCellValue()+" ");
+                                        //amzrow.add(cell.getNumericCellValue()); 
+					//System.out.print(cell.getNumericCellValue()+" ");
 				}
 				else
 				{
 					//U Can Handel Boolean, Formula, Errors
 				}
 			}
-			System.out.println();
+			csvData.add(amzrow);
 		}
+                //tableview.getItems().add(csvData);
 	
 	}
     

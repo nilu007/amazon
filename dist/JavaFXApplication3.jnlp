@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="JavaFXApplication3.jar" size="4608" download="eager" />
+    <jar href="JavaFXApplication3.jar" size="6915" download="eager" />
     <jar href="lib\commons-codec-1.10.jar" size="284184" download="eager" />
     <jar href="lib\commons-logging-1.2.jar" size="61829" download="eager" />
     <jar href="lib\curvesapi-1.03.jar" size="92241" download="eager" />
@@ -17,6 +17,9 @@
     <jar href="lib\poi-3.14-20160307.jar" size="2528204" download="eager" />
     <jar href="lib\poi-ooxml-3.14-20160307.jar" size="1286511" download="eager" />
     <jar href="lib\poi-ooxml-schemas-3.14-20160307.jar" size="5919795" download="eager" />
+    <jar href="lib\selenium-java-2.53.0-srcs.jar" size="657005" download="eager" />
+    <jar href="lib\selenium-java-2.53.0.jar" size="1858044" download="eager" />
+    <jar href="lib\selenium-server-2.39.0.jar" size="2344859" download="eager" />
     <jar href="lib\xmlbeans-2.6.0.jar" size="2730866" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="JavaFXApplication3" >

@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableCell;
 import javafx.stage.Stage;
-
+import javafx.geometry.Pos;
 
 /**
  *
@@ -60,4 +60,5 @@ public class JavaFXApplication3 extends Application {
         launch(args);
     }
     
+}
 }
